@@ -5,6 +5,7 @@ import LoadingScreen from './components/LoadingScreen';
 import AnimatedSection from './components/AnimatedSection';
 import ServiceCard from './components/ServiceCard';
 import ReferenceCard from './components/ReferenceCard';
+import PeterImage from './images/Peter.png';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -181,6 +182,13 @@ function App() {
               </h2>
               <div className="grid md:grid-cols-2 gap-12">
                 <div>
+                  <div className="mb-8">
+                    <img 
+                      src={PeterImage} 
+                      alt="Peter Mayer" 
+                      className="w-48 h-48 rounded-full object-cover mx-auto mb-6 shadow-lg"
+                    />
+                  </div>
                   <h3 className="text-2xl mb-6 font-medium">Kontaktinformationen</h3>
                   <div className="space-y-4">
                     <div className="flex items-center">
