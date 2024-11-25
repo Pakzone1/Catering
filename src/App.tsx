@@ -174,6 +174,60 @@ function App() {
             </div>
           </AnimatedSection>
 
+          {/* Blog Section */}
+          <AnimatedSection className="py-24 px-4 bg-white">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-4xl mb-16 text-center font-light">Aktuelles aus unserer Küche</h2>
+              <div className="grid md:grid-cols-3 gap-8">
+                {[
+                  {
+                    title: 'Nachhaltiges Catering',
+                    date: '15. März 2024',
+                    image: 'https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+                    excerpt: 'Wie wir Nachhaltigkeit in unsere Catering-Services integrieren und dabei Qualität gewährleisten.'
+                  },
+                  {
+                    title: 'Trends im Event Catering',
+                    date: '1. März 2024',
+                    image: 'https://images.unsplash.com/photo-1587899897387-091ebd01a6b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+                    excerpt: 'Die neuesten Catering-Trends für Ihre Veranstaltung - von Food Stations bis hin zu interaktiven Kocherlebnissen.'
+                  },
+                  {
+                    title: 'Regionale Zutaten',
+                    date: '20. Februar 2024',
+                    image: 'https://images.unsplash.com/photo-1490818387583-1baba5e638af?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+                    excerpt: 'Warum wir auf lokale Produzenten setzen und wie das den Geschmack unserer Gerichte verbessert.'
+                  }
+                ].map((post, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.2 }}
+                    className="bg-white rounded-lg overflow-hidden shadow-lg"
+                  >
+                    <div className="h-48 overflow-hidden">
+                      <img 
+                        src={post.image} 
+                        alt={post.title}
+                        className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                    <div className="p-6">
+                      <div className="text-sm text-amber-600 mb-2">{post.date}</div>
+                      <h3 className="text-xl font-medium mb-2">{post.title}</h3>
+                      <p className="text-gray-600">{post.excerpt}</p>
+                      <button className="mt-4 text-amber-600 font-medium hover:text-amber-700 transition-colors duration-300">
+                        Weiterlesen →
+                      </button>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </AnimatedSection>
+
           {/* Contact Section */}
           <AnimatedSection className="py-24 px-4 bg-gray-50">
             <div className="max-w-4xl mx-auto">
