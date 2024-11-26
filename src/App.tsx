@@ -6,6 +6,7 @@ import AnimatedSection from './components/AnimatedSection';
 import ServiceCard from './components/ServiceCard';
 import ReferenceCard from './components/ReferenceCard';
 import PeterImage from './images/Peter.png';
+import WhatsAppWidget from './components/WhatsAppWidget';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -164,11 +165,34 @@ function App() {
                     ]
                   }
                 ].map((item, i) => (
-                  <ReferenceCard
+                  <motion.div
                     key={i}
-                    {...item}
-                    delay={i * 0.2}
-                  />
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.2 }}
+                    className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+                  >
+                    <div className="h-48 overflow-hidden">
+                      <img 
+                        src={item.image} 
+                        alt={item.title}
+                        className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-xl font-semibold mb-1">{item.title}</h3>
+                      <div className="text-amber-600 text-sm mb-4">{item.subtitle}</div>
+                      <ul className="space-y-2">
+                        {item.points.map((point, index) => (
+                          <li key={index} className="flex items-start">
+                            <span className="text-amber-600 mr-2">•</span>
+                            <span className="text-gray-600">{point}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -256,34 +280,45 @@ function App() {
                   </div>
                 </div>
                 <motion.form 
+                  name="contact"
+                  method="POST"
+                  data-netlify="true"
                   className="space-y-6"
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.3 }}
                 >
+                  <input type="hidden" name="form-name" value="contact" />
                   <div>
                     <input
                       type="text"
+                      name="name"
                       placeholder="Dein Name"
+                      required
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none"
                     />
                   </div>
                   <div>
                     <input
                       type="email"
+                      name="email"
                       placeholder="Deine E-Mail"
+                      required
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none"
                     />
                   </div>
                   <div>
                     <textarea
+                      name="message"
                       placeholder="Deine Nachricht"
+                      required
                       rows={4}
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none"
                     ></textarea>
                   </div>
                   <motion.button 
+                    type="submit"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     className="w-full bg-amber-600 text-white px-6 py-3 rounded-lg hover:bg-amber-700 transition-colors duration-300"
@@ -332,6 +367,7 @@ function App() {
               </div>
             </div>
           </footer>
+          <WhatsAppWidget />
         </motion.div>
       )}
     </AnimatePresence>
