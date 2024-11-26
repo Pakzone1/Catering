@@ -283,13 +283,40 @@ function App() {
                   name="contact"
                   method="POST"
                   data-netlify="true"
+                  action="/success"
+                  netlify-honeypot="bot-field"
                   className="space-y-6"
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.3 }}
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    const form = e.target as HTMLFormElement;
+                    const formData = new FormData(form);
+
+                    fetch("/", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                      body: new URLSearchParams(formData).toString(),
+                    })
+                      .then(() => {
+                        alert("Vielen Dank für Ihre Nachricht! Wir melden uns in Kürze bei Ihnen.");
+                        form.reset();
+                      })
+                      .catch((error) => alert("Error: " + error));
+                  }}
                 >
+                  {/* Honeypot field to prevent spam */}
+                  <p className="hidden">
+                    <label>
+                      Don't fill this out if you're human: <input name="bot-field" />
+                    </label>
+                  </p>
+                  
+                  {/* Required hidden input for Netlify */}
                   <input type="hidden" name="form-name" value="contact" />
+                  
                   <div>
                     <input
                       type="text"
